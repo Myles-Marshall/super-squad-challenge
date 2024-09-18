@@ -10,6 +10,7 @@ const app = express();
 // Define paths
 const clientPath = path.join(__dirname, '..', 'client/src');
 const dataPath = path.join(__dirname, 'data', 'users.json');
+const heroPath = path.join(__dirname, "data", "superheroes.json");
 const serverPublic = path.join(__dirname, 'public');
 // Middleware setup
 app.use(express.static(clientPath)); // Serve static files from client directory
@@ -101,6 +102,54 @@ app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
     } catch (error) {
         console.error('Error updating user:', error);
         res.status(500).send('An error occurred while updating the user.');
+    }
+});
+
+app.get("/heroes", async (req, res) => {
+    try {
+        const data = fs.readFile(heroPath, "utf8")
+        heroes = JSON.parse(data);
+
+        if (!heroes) {
+            throw new Error("Heroes not found");
+        }
+
+        res.status(200).json(heroes)
+    } catch (error) {
+        console.error("Problem getting heroes", error)
+        res.status(500).json({ error: "Problem reading heroes" });
+    }
+});
+
+app.get("/superhero-form", (req, res) => {
+    res.sendFile("pages/superhero_form.html", { root: serverPublic });
+});
+
+app.post("/submit-hero", async (req, res) => {
+    try {
+        const { heroName, heroUniverse, heroPowers } = req.body;
+
+        let heroes = [];
+        try {
+            const heroData = await fs.readFile(heroPath, "utf8");
+            heroes = JSON.parse(heroData);
+        } catch (error) {
+            console.error("Error reading hero data", error)
+            heroes = [];
+        }
+
+        let hero = heroes.find(h => h.heroName === heroName && h.heroUniverse === heroUniverse && h.heroPowers === heroPowers);
+        if (hero) {
+            res.send("Hero already exists.")
+        } else {
+            hero = { heroName, heroUniverse, heroPowers };
+            heroes.push(hero);
+        }
+
+        await fs.writeFile(heroPath, JSON.stringify(heroes, null, 2))
+        res.redirect("/superhero-form");
+    } catch (error) {
+        console.error(error.message);
     }
 });
 

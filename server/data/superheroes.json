@@ -1,7 +1,12 @@
 [
-    {
-        "name": "Superman",
-        "power": "Flight, Super Strength",
-        "universe": "DC"
-    }
+  {
+    "heroName": "Superman",
+    "heroPowers": "Flight, Super Strength",
+    "heroUniverse": "DC"
+  },
+  {
+    "heroName": "Bo",
+    "heroUniverse": "Somewhere",
+    "heroPowers": "akjsfjasdfk"
+  }
 ]
