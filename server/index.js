@@ -107,7 +107,7 @@ app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
 
 app.get("/heroes", async (req, res) => {
     try {
-        const data = fs.readFile(heroPath, "utf8")
+        const data = await fs.readFile(heroPath, "utf8")
         heroes = JSON.parse(data);
 
         if (!heroes) {
@@ -151,6 +151,11 @@ app.post("/submit-hero", async (req, res) => {
     } catch (error) {
         console.error(error.message);
     }
+});
+
+app.put("/update-hero/:currentHeroName/:currentHeroUniverse", (req, res) => {
+    const { currentHeroName, currentHeroUniverse } = req.params;
+    const { newHeroName, newHeroUniverse, newHeroPowers } = req.body;
 });
 
 // Start the server

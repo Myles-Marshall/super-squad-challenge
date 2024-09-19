@@ -21,12 +21,21 @@
     </form>
 
     <h1>Superhero Update Form</h1>
-    <form action="/update-hero" method="put">
+    <form id="updateHero">
         <label for="currentHeroName">Hero Name:</label>
-        <input type="text" id="currentHeroName" name="heroName" required> <br><br>
+        <input type="text" id="currentHeroName" name="currentHeroName" required> <br><br>
 
-        <label for="currentHeroUniverse">Hero Universe</label>
-        <input type="text" id="currentHeroUniverse" name="heroUniverse" required> <br><br>
+        <label for="currentHeroUniverse">Hero Universe:</label>
+        <input type="text" id="currentHeroUniverse" name="currentHeroUniverse" required> <br><br>
+        
+        <label for="currentHeroPowers">Hero Powers:</label>
+        <input type="text" id="currentHeroPowers" name="currentHeroPowers" required> <br><br>
+
+        <label for="newHeroName">New Hero Name:</label>
+        <input type="text" id="newHeroName" name="newHeroName" required> <br><br>
+
+        <label for="newHeroUniverse">New Hero Universe:</label>
+        <input type="text" id="newHeroUniverse" name="newHeroUniverse" required> <br><br>
 
         <label for="newHeroPowers">New Hero Powers:</label> <br>
         <textarea id="newHeroPowers" name="newHeroPowers" rows="4" cols="50" required></textarea> <br><br>
@@ -51,6 +60,38 @@
 
 
     <script>
+        document.getElementById("updateHero").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const currentHeroName = document.getElementById("currentHeroName").value;
+            const currentHeroUniverse = document.getElementById("currentHeroUniverse").value;
+            const currentHeroPowers = document.getElementById("currentHeroPowers").value;
+            
+            const newHeroName = document.getElementById("newHeroName").value;
+            const newHeroUniverse = document.getElementById("newHeroUniverse").value;
+            const newHeroPowers = document.getElementById("newHeroPowers").value;
+
+            try {
+                const response = await fetch(
+                    `/update-hero/${currentHeroName}/${currentHeroUniverse}`,
+                    {
+                        method: "PUT",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({newHeroName, newHeroUniverse, newHeroUniverse}),
+                    }
+                );
+
+                const data = await response.json();
+                console.log(data)
+                renderUsers()
+            } catch(error) {
+                console.error(error)
+            }
+        });
+
+
         async function fetchUsers() {
             try {
                 const response = await fetch("/heroes");
