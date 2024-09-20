@@ -26,44 +26,64 @@ body {
 
 .form-container {
     margin-top: 4rem;
-    /* outline: 5px solid black; */
+    outline: 5px solid black;
     height: 60vh;
+    display: flex;
+    justify-content: center;
 }
 
 #right-arrow {
     position: absolute;
     top: 50%;
     right: 25%;
-}
-
-#right-arrow > box-icon:hover {
-    cursor: pointer;
+    z-index: 10000;
 }
 
 #left-arrow {
     position: absolute;
     top: 50%;
-    left: 27%;
+    left: 25%;
+    z-index: 10000;
+}
+
+.arrow-hover:hover {
+    cursor: pointer;
 }
 
 .hero-form-card {
     background-color: rgba(255, 255, 255);
     color: black;
     text-align: center;
+    width: 30%;
     padding: 15px;
     border-radius: 10px;
 }
 
+.active-slide {
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.inactive-slide-left {
+    left: 20%;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 998;
+}
+
+.inactive-slide-right {
+    right: 20%;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 998;
+}
+
 #creation-card {
-    width: 30%;
     position: absolute;
     top: 35%;
-    left: 35%;
 }
 
 #update-card {
-    width: 30%;
     position: absolute;
     top: 35%;
-    left: -50%;
 }

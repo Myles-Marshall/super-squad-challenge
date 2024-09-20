@@ -131,6 +131,10 @@ app.get("/superhero_forms.css", (req, res) => {
     res.sendFile("css/superhero_forms.css", { root: serverPublic });
 })
 
+app.get("/superhero_sliders.js", (req, res) => {
+    res.sendFile("js/slider-functionality.js", { root: serverPublic });
+});
+
 app.post("/submit-hero", async (req, res) => {
     try {
         const { heroName, heroUniverse, heroPowers } = req.body;

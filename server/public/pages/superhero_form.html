@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Superhero Form</title>
-    <link rel="stylesheet" type="text/css" href="../superhero_forms.css" />
+    <link rel="stylesheet" type="text/css" href="/superhero_forms.css" />
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="/superhero_sliders.js" defer></script>
   </head>
   <body>
     <div class="show-hero-container">
@@ -28,14 +29,14 @@
 
     <div class="form-container">
       <div id="right-arrow">
-        <box-icon name="right-arrow-alt" size="lg"></box-icon>
+        <box-icon id="right-arrow-click" class="arrow-hover" name="right-arrow-alt" size="lg"></box-icon>
       </div>
 
       <div id="left-arrow">
-        <box-icon name="left-arrow-alt" size="lg"></box-icon>
+        <box-icon id="left-arrow-click" class="arrow-hover" name="left-arrow-alt" size="lg"></box-icon>
       </div>
 
-      <div class="hero-form-card" id="creation-card">
+      <div class="hero-form-card active-slide" id="creation-card">
         <h1>Superhero Creation Form</h1>
   
         <form id="createHero" action="/submit-hero" method="post">
@@ -60,7 +61,7 @@
         </form>
       </div>
   
-      <div class="hero-form-card" id="update-card">
+      <div class="hero-form-card inactive-slide-right" id="update-card">
         <h1>Superhero Powers Update Form</h1>
         <form id="updateHero">
           <label for="currentHeroName">Hero Name:</label>
@@ -156,9 +157,6 @@
       }
 
       document.addEventListener("DOMContentLoaded", renderUsers);
-
-
-      
     </script>
   </body>
 </html>
