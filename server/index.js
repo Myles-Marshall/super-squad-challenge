@@ -105,6 +105,8 @@ app.put('/update-user/:currentName/:currentEmail', async (req, res) => {
     }
 });
 
+// SUPERHERO SECTION!!!!
+
 app.get("/heroes", async (req, res) => {
     try {
         const data = await fs.readFile(heroPath, "utf8")
@@ -124,6 +126,10 @@ app.get("/heroes", async (req, res) => {
 app.get("/superhero-form", (req, res) => {
     res.sendFile("pages/superhero_form.html", { root: serverPublic });
 });
+
+app.get("/superhero_forms.css", (req, res) => {
+    res.sendFile("css/superhero_forms.css", { root: serverPublic });
+})
 
 app.post("/submit-hero", async (req, res) => {
     try {
@@ -153,9 +159,31 @@ app.post("/submit-hero", async (req, res) => {
     }
 });
 
-app.put("/update-hero/:currentHeroName/:currentHeroUniverse", (req, res) => {
-    const { currentHeroName, currentHeroUniverse } = req.params;
-    const { newHeroName, newHeroUniverse, newHeroPowers } = req.body;
+app.put("/update-hero/:currentHeroName/:currentHeroUniverse", async (req, res) => {
+    try {
+        const { currentHeroName, currentHeroUniverse } = req.params;
+        const { newHeroPowers } = req.body;
+
+        const data = await fs.readFile(heroPath, "utf8");
+
+        if (data) {
+            let heroes = JSON.parse(data);
+
+            const heroIndex = heroes.findIndex(hero => hero.heroName === currentHeroName && hero.heroUniverse === currentHeroUniverse);
+
+            if (heroIndex === -1) {
+                return res.status(404).json({ message: "Hero not found" });
+            }
+
+            heroes[heroIndex] = { ...heroes[heroIndex], heroPowers: newHeroPowers }
+
+            await fs.writeFile(heroPath, JSON.stringify(heroes, null, 2));
+            res.status(200).json({ message: `Hero Powers updated successfully` });
+        }
+    } catch (error) {
+        console.error(error)
+        res.status(500).send(`Error caught while updating hero`)
+    }
 });
 
 // Start the server

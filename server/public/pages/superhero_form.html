@@ -1,130 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Superhero Form</title>
-</head>
-<body>
-    <h1>Superhero Creation Form</h1>
-    <form action="/submit-hero" method="post">
-        <label for="heroName">Hero Name:</label>
-        <input type="text" id="heroName" name="heroName" required> <br><br>
-
-        <label for="heroUniverse">Hero Universe</label>
-        <input type="text" id="heroUniverse" name="heroUniverse" required> <br><br>
-
-        <label for="heroPowers">Hero Powers:</label> <br>
-        <textarea id="heroPowers" name="heroPowers" rows="4" cols="50" required></textarea> <br><br>
-
-        <button type="submit">Create Hero</button>
-    </form>
-
-    <h1>Superhero Update Form</h1>
-    <form id="updateHero">
-        <label for="currentHeroName">Hero Name:</label>
-        <input type="text" id="currentHeroName" name="currentHeroName" required> <br><br>
-
-        <label for="currentHeroUniverse">Hero Universe:</label>
-        <input type="text" id="currentHeroUniverse" name="currentHeroUniverse" required> <br><br>
-        
-        <label for="currentHeroPowers">Hero Powers:</label>
-        <input type="text" id="currentHeroPowers" name="currentHeroPowers" required> <br><br>
-
-        <label for="newHeroName">New Hero Name:</label>
-        <input type="text" id="newHeroName" name="newHeroName" required> <br><br>
-
-        <label for="newHeroUniverse">New Hero Universe:</label>
-        <input type="text" id="newHeroUniverse" name="newHeroUniverse" required> <br><br>
-
-        <label for="newHeroPowers">New Hero Powers:</label> <br>
-        <textarea id="newHeroPowers" name="newHeroPowers" rows="4" cols="50" required></textarea> <br><br>
-
-        <button type="submit">Update Hero</button>
-    </form>
-
-    <h1>Show Heroes</h1>
-    <table id="heroesTable">
+    <link rel="stylesheet" type="text/css" href="../superhero_forms.css" />
+  </head>
+  <body>
+    <div class="table-container">
+      <h1>Show Heroes</h1>
+      <table id="heroesTable">
         <thead>
-            <tr>
-                <th>Hero Name</th>
-                <th>Hero Universe</th>
-                <th>Hero Powers</th>
-            </tr>
+          <tr>
+            <th>Hero Name</th>
+            <th>Hero Universe</th>
+            <th>Hero Powers</th>
+          </tr>
         </thead>
 
-        <tbody id="heroTableBody">
+        <tbody id="heroTableBody"></tbody>
+      </table>
+    </div>
 
-        </tbody>
-    </table>
+    <h1>Superhero Creation Form</h1>
+    <form id="createHero" action="/submit-hero" method="post">
+      <label for="heroName">Hero Name:</label>
+      <input type="text" id="heroName" name="heroName" required /> <br /><br />
 
+      <label for="heroUniverse">Hero Universe</label>
+      <input type="text" id="heroUniverse" name="heroUniverse" required />
+      <br /><br />
+
+      <label for="heroPowers">Hero Powers:</label> <br />
+      <textarea
+        id="heroPowers"
+        name="heroPowers"
+        rows="4"
+        cols="50"
+        required
+      ></textarea>
+      <br /><br />
+
+      <button type="submit">Create Hero</button>
+    </form>
+
+    <h1>Superhero Powers Update Form</h1>
+    <form id="updateHero">
+      <label for="currentHeroName">Hero Name:</label>
+      <input type="text" id="currentHeroName" name="currentHeroName" required />
+      <br /><br />
+
+      <label for="currentHeroUniverse">Hero Universe:</label>
+      <input
+        type="text"
+        id="currentHeroUniverse"
+        name="currentHeroUniverse"
+        required
+      />
+      <br /><br />
+
+      <label for="newHeroPowers">New Hero Powers:</label> <br />
+      <textarea
+        id="newHeroPowers"
+        name="newHeroPowers"
+        rows="4"
+        cols="50"
+        required
+      ></textarea>
+      <br /><br />
+
+      <button type="submit">Update Hero Powers</button>
+    </form>
 
     <script>
-        document.getElementById("updateHero").addEventListener("submit", async (e) => {
-            e.preventDefault();
+      document
+        .getElementById("updateHero")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-            const currentHeroName = document.getElementById("currentHeroName").value;
-            const currentHeroUniverse = document.getElementById("currentHeroUniverse").value;
-            const currentHeroPowers = document.getElementById("currentHeroPowers").value;
-            
-            const newHeroName = document.getElementById("newHeroName").value;
-            const newHeroUniverse = document.getElementById("newHeroUniverse").value;
-            const newHeroPowers = document.getElementById("newHeroPowers").value;
+          const currentHeroName =
+            document.getElementById("currentHeroName").value;
+          const currentHeroUniverse = document.getElementById(
+            "currentHeroUniverse"
+          ).value;
 
-            try {
-                const response = await fetch(
-                    `/update-hero/${currentHeroName}/${currentHeroUniverse}`,
-                    {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify({newHeroName, newHeroUniverse, newHeroUniverse}),
-                    }
-                );
+          const newHeroPowers = document.getElementById("newHeroPowers").value;
 
-                const data = await response.json();
-                console.log(data)
-                renderUsers()
-            } catch(error) {
-                console.error(error)
-            }
+          try {
+            const response = await fetch(
+              `/update-hero/${currentHeroName}/${currentHeroUniverse}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ newHeroPowers }),
+              }
+            );
+
+            const data = await response.json();
+            console.log(data);
+            renderUsers();
+          } catch (error) {
+            console.error(error);
+          }
         });
 
+      async function fetchUsers() {
+        try {
+          const response = await fetch("/heroes");
 
-        async function fetchUsers() {
-            try {
-                const response = await fetch("/heroes");
+          if (!response.ok) {
+            // throw new Error("Error fetching users");
+          }
 
-                if (!response.ok) {
-                    // throw new Error("Error fetching users");
-                }
-
-                const heroes = await response.json();
-                return heroes;
-            } catch (error) {
-                console.error("There was a problem", error)
-            }
+          const heroes = await response.json();
+          return heroes;
+        } catch (error) {
+          console.error("There was a problem", error);
         }
+      }
 
-        async function renderUsers() {
-            const tableBody = document.getElementById("heroTableBody");
-            tableBody.innerHTML = "";
+      async function renderUsers() {
+        const tableBody = document.getElementById("heroTableBody");
+        tableBody.innerHTML = "";
 
-            try {
-                const heroes = await fetchUsers();
-                if (Array.isArray(heroes) && heroes.length > 0) {
-                    heroes.forEach((hero) => {
-                        const row = `<tr><td>${hero.heroName}</td><td>${hero.heroUniverse}</td><td>${hero.heroPowers}</td></tr>`
-                        tableBody.innerHTML += row;
-                    })
-                }
-            } catch (error) {
+        try {
+          const heroes = await fetchUsers();
+          if (Array.isArray(heroes) && heroes.length > 0) {
+            heroes.forEach((hero) => {
+              const row = `<tr><td>${hero.heroName}</td><td>${hero.heroUniverse}</td><td>${hero.heroPowers}</td></tr>`;
+              tableBody.innerHTML += row;
+            });
+          }
+        } catch (error) {}
+      }
 
-            }
-        }
-
-        document.addEventListener("DOMContentLoaded", renderUsers);
+      document.addEventListener("DOMContentLoaded", renderUsers);
     </script>
-</body>
+  </body>
 </html>
