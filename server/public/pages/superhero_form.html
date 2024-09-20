@@ -5,72 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Superhero Form</title>
     <link rel="stylesheet" type="text/css" href="../superhero_forms.css" />
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   </head>
   <body>
-    <div class="table-container">
-      <h1>Show Heroes</h1>
-      <table id="heroesTable">
-        <thead>
-          <tr>
-            <th>Hero Name</th>
-            <th>Hero Universe</th>
-            <th>Hero Powers</th>
-          </tr>
-        </thead>
+    <div class="show-hero-container">
+      <h1 id="show-hero-header">Show Heroes</h1>
 
-        <tbody id="heroTableBody"></tbody>
-      </table>
+      <div class="table-container">
+        <table id="heroesTable">
+          <thead>
+            <tr>
+              <th>Hero Name</th>
+              <th>Hero Universe</th>
+              <th>Hero Powers</th>
+            </tr>
+          </thead>
+  
+          <tbody id="heroTableBody"></tbody>
+        </table>
+      </div>
     </div>
 
-    <h1>Superhero Creation Form</h1>
-    <form id="createHero" action="/submit-hero" method="post">
-      <label for="heroName">Hero Name:</label>
-      <input type="text" id="heroName" name="heroName" required /> <br /><br />
+    <div class="form-container">
+      <div id="right-arrow">
+        <box-icon name="right-arrow-alt" size="lg"></box-icon>
+      </div>
 
-      <label for="heroUniverse">Hero Universe</label>
-      <input type="text" id="heroUniverse" name="heroUniverse" required />
-      <br /><br />
+      <div id="left-arrow">
+        <box-icon name="left-arrow-alt" size="lg"></box-icon>
+      </div>
 
-      <label for="heroPowers">Hero Powers:</label> <br />
-      <textarea
-        id="heroPowers"
-        name="heroPowers"
-        rows="4"
-        cols="50"
-        required
-      ></textarea>
-      <br /><br />
-
-      <button type="submit">Create Hero</button>
-    </form>
-
-    <h1>Superhero Powers Update Form</h1>
-    <form id="updateHero">
-      <label for="currentHeroName">Hero Name:</label>
-      <input type="text" id="currentHeroName" name="currentHeroName" required />
-      <br /><br />
-
-      <label for="currentHeroUniverse">Hero Universe:</label>
-      <input
-        type="text"
-        id="currentHeroUniverse"
-        name="currentHeroUniverse"
-        required
-      />
-      <br /><br />
-
-      <label for="newHeroPowers">New Hero Powers:</label> <br />
-      <textarea
-        id="newHeroPowers"
-        name="newHeroPowers"
-        rows="4"
-        cols="50"
-        required
-      ></textarea>
-      <br /><br />
-
-      <button type="submit">Update Hero Powers</button>
-    </form>
+      <div class="hero-form-card" id="creation-card">
+        <h1>Superhero Creation Form</h1>
+  
+        <form id="createHero" action="/submit-hero" method="post">
+          <label for="heroName">Hero Name:</label>
+          <input type="text" id="heroName" name="heroName" required /> <br /><br />
+    
+          <label for="heroUniverse">Hero Universe</label>
+          <input type="text" id="heroUniverse" name="heroUniverse" required />
+          <br /><br />
+    
+          <label for="heroPowers">Hero Powers:</label> <br />
+          <textarea
+            id="heroPowers"
+            name="heroPowers"
+            rows="4"
+            cols="50"
+            required
+          ></textarea>
+          <br /><br />
+    
+          <button type="submit">Create Hero</button>
+        </form>
+      </div>
+  
+      <div class="hero-form-card" id="update-card">
+        <h1>Superhero Powers Update Form</h1>
+        <form id="updateHero">
+          <label for="currentHeroName">Hero Name:</label>
+          <input type="text" id="currentHeroName" name="currentHeroName" required />
+          <br /><br />
+    
+          <label for="currentHeroUniverse">Hero Universe:</label>
+          <input
+            type="text"
+            id="currentHeroUniverse"
+            name="currentHeroUniverse"
+            required
+          />
+          <br /><br />
+    
+          <label for="newHeroPowers">New Hero Powers:</label> <br />
+          <textarea
+            id="newHeroPowers"
+            name="newHeroPowers"
+            rows="4"
+            cols="50"
+            required
+          ></textarea>
+          <br /><br />
+    
+          <button type="submit">Update Hero Powers</button>
+        </form>
+      </div>
+    </div>
 
     <script>
       document
@@ -137,6 +156,9 @@
       }
 
       document.addEventListener("DOMContentLoaded", renderUsers);
+
+
+      
     </script>
   </body>
 </html>
