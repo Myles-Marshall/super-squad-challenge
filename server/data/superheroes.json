@@ -1,10 +1,12 @@
 [
   {
+    "id": 1,
     "heroName": "Superman",
     "heroPowers": "Flight, Super Strength",
     "heroUniverse": "DC"
   },
   {
+    "id": 2,
     "heroName": "Bo",
     "heroUniverse": "Somewhere",
     "heroPowers": "auidssdjfasdf"

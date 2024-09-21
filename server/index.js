@@ -152,7 +152,8 @@ app.post("/submit-hero", async (req, res) => {
         if (hero) {
             res.send("Hero already exists.")
         } else {
-            hero = { heroName, heroUniverse, heroPowers };
+            let id = heroes.length + 1;
+            hero = {id, heroName, heroUniverse, heroPowers };
             heroes.push(hero);
         }
 
@@ -187,6 +188,31 @@ app.put("/update-hero/:currentHeroName/:currentHeroUniverse", async (req, res) =
     } catch (error) {
         console.error(error)
         res.status(500).send(`Error caught while updating hero`)
+    }
+});
+
+app.put("/delete-hero", async (req, res) => {
+    console.log("test")
+    try {
+        const { existingHeroName, existingHeroUniverse, existingHeroPowers } = req.body;
+
+        const data = await fs.readFile(heroPath, "utf8");
+
+        if (data) {
+            let heroes = JSON.parse(data);
+            const heroIndex = heroes.findIndex(hero => hero.heroName === existingHeroName && hero.heroUniverse === existingHeroUniverse && hero.heroPowers === existingHeroPowers);
+            console.log(heroes[heroIndex])
+
+            if (heroIndex === -1) {
+                return res.status(404).json({ message: "Hero not found" });
+            }
+
+            heroes.splice(heroIndex, 1)
+            await fs.writeFile(heroPath, JSON.stringify(heroes, null, 2));
+            res.status(200).json({ message: `Hero deleted successfully` });
+        }
+    } catch (error) {
+        console.error(`Error deleting user`, error)
     }
 });
 

@@ -8,6 +8,7 @@ body {
     background-color: #fff;
     width: 50%;
     margin: auto;
+    padding: 5px;
     border-radius: 10px;
     /* display: flex; */
     /* justify-content: center; */
@@ -26,7 +27,7 @@ body {
 
 .form-container {
     margin-top: 4rem;
-    outline: 5px solid black;
+    /* outline: 5px solid black; */
     height: 60vh;
     display: flex;
     justify-content: center;
@@ -57,24 +58,27 @@ body {
     width: 30%;
     padding: 15px;
     border-radius: 10px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
 }
 
 .active-slide {
-    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.5);
+    /* box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5); */
     z-index: 999;
 }
 
 .inactive-slide-left {
-    left: 20%;
+    left: 10%;
     opacity: 0.2;
     pointer-events: none;
+    user-select: none;
     z-index: 998;
 }
 
 .inactive-slide-right {
-    right: 20%;
+    right: 10%;
     opacity: 0.2;
     pointer-events: none;
+    user-select: none;
     z-index: 998;
 }
 
@@ -84,6 +88,11 @@ body {
 }
 
 #update-card {
+    position: absolute;
+    top: 35%;
+}
+
+#delete-card {
     position: absolute;
     top: 35%;
 }

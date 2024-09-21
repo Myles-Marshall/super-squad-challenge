@@ -16,12 +16,13 @@
         <table id="heroesTable">
           <thead>
             <tr>
+              <th>Hero ID</th>
               <th>Hero Name</th>
               <th>Hero Universe</th>
               <th>Hero Powers</th>
             </tr>
           </thead>
-  
+
           <tbody id="heroTableBody"></tbody>
         </table>
       </div>
@@ -29,24 +30,35 @@
 
     <div class="form-container">
       <div id="right-arrow">
-        <box-icon id="right-arrow-click" class="arrow-hover" name="right-arrow-alt" size="lg"></box-icon>
+        <box-icon
+          id="right-arrow-click"
+          class="arrow-hover"
+          name="right-arrow-alt"
+          size="lg"
+        ></box-icon>
       </div>
 
       <div id="left-arrow">
-        <box-icon id="left-arrow-click" class="arrow-hover" name="left-arrow-alt" size="lg"></box-icon>
+        <box-icon
+          id="left-arrow-click"
+          class="arrow-hover"
+          name="left-arrow-alt"
+          size="lg"
+        ></box-icon>
       </div>
 
       <div class="hero-form-card active-slide" id="creation-card">
         <h1>Superhero Creation Form</h1>
-  
+
         <form id="createHero" action="/submit-hero" method="post">
           <label for="heroName">Hero Name:</label>
-          <input type="text" id="heroName" name="heroName" required /> <br /><br />
-    
-          <label for="heroUniverse">Hero Universe</label>
+          <input type="text" id="heroName" name="heroName" required />
+          <br /><br />
+
+          <label for="heroUniverse">Hero Universe:</label>
           <input type="text" id="heroUniverse" name="heroUniverse" required />
           <br /><br />
-    
+
           <label for="heroPowers">Hero Powers:</label> <br />
           <textarea
             id="heroPowers"
@@ -56,18 +68,23 @@
             required
           ></textarea>
           <br /><br />
-    
+
           <button type="submit">Create Hero</button>
         </form>
       </div>
-  
+
       <div class="hero-form-card inactive-slide-right" id="update-card">
         <h1>Superhero Powers Update Form</h1>
         <form id="updateHero">
           <label for="currentHeroName">Hero Name:</label>
-          <input type="text" id="currentHeroName" name="currentHeroName" required />
+          <input
+            type="text"
+            id="currentHeroName"
+            name="currentHeroName"
+            required
+          />
           <br /><br />
-    
+
           <label for="currentHeroUniverse">Hero Universe:</label>
           <input
             type="text"
@@ -76,7 +93,7 @@
             required
           />
           <br /><br />
-    
+
           <label for="newHeroPowers">New Hero Powers:</label> <br />
           <textarea
             id="newHeroPowers"
@@ -86,8 +103,38 @@
             required
           ></textarea>
           <br /><br />
-    
+
           <button type="submit">Update Hero Powers</button>
+        </form>
+      </div>
+
+      <div class="hero-form-card inactive-slide-left" id="delete-card">
+        <h1>Superhero Deletion Form</h1>
+
+        <form id="deleteHero">
+          <label for="existingHeroName">Hero Name:</label>
+          <input type="text" id="existingHeroName" name="heroName" required />
+          <br /><br />
+
+          <label for="existingHeroUniverse">Hero Universe:</label>
+          <input
+            type="text"
+            id="existingHeroUniverse"
+            name="heroUniverse"
+            required
+          />
+          <br /><br />
+
+          <label for="existingHeroPowers">Hero Powers:</label>
+          <textarea
+            name="heroPowers"
+            id="existingHeroPowers"
+            cols="50"
+            rows="4"
+          ></textarea>
+          <br /><br />
+
+          <button type="submit">Delete Hero</button>
         </form>
       </div>
     </div>
@@ -126,6 +173,33 @@
           }
         });
 
+        const deleteForm = document.getElementById("deleteHero")
+      
+        deleteForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const existingHeroName = document.getElementById("existingHeroName").value;
+          const existingHeroUniverse = document.getElementById("existingHeroUniverse").value;
+          const existingHeroPowers = document.getElementById("existingHeroPowers").value;
+
+          try {
+            const response = await fetch(
+              `/delete-hero`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({existingHeroName, existingHeroUniverse, existingHeroPowers}),
+              }
+            );
+
+            renderUsers();
+          } catch (error) {
+            console.error(error)
+          }
+        });
+
       async function fetchUsers() {
         try {
           const response = await fetch("/heroes");
@@ -149,7 +223,7 @@
           const heroes = await fetchUsers();
           if (Array.isArray(heroes) && heroes.length > 0) {
             heroes.forEach((hero) => {
-              const row = `<tr><td>${hero.heroName}</td><td>${hero.heroUniverse}</td><td>${hero.heroPowers}</td></tr>`;
+              const row = `<tr><td>${hero.id}</td><td>${hero.heroName}</td><td>${hero.heroUniverse}</td><td>${hero.heroPowers}</td></tr>`;
               tableBody.innerHTML += row;
             });
           }

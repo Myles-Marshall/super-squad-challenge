@@ -6,26 +6,30 @@ const rightArrow = document.getElementById("right-arrow-click");
 
 leftArrow.addEventListener("click", () => {
     const active = document.querySelector(".active-slide");
-    const inactive = document.querySelector(".inactive-slide-right");
+    const inactiveLeft = document.querySelector(".inactive-slide-left");
+    const inactiveRight = document.querySelector(".inactive-slide-right");
 
-    if (inactive) {
-        active.classList.add("inactive-slide-left")
-        active.classList.remove("active-slide");
+    active.classList.add("inactive-slide-right");
+    active.classList.remove("active-slide");
 
-        inactive.classList.add("active-slide");
-        inactive.classList.remove("inactive-slide-right");
-    }
+    inactiveRight.classList.add("inactive-slide-left");
+    inactiveRight.classList.remove("inactive-slide-right");
+
+    inactiveLeft.classList.add("active-slide")
+    inactiveLeft.classList.remove("inactive-slide-left");
 });
 
 rightArrow.addEventListener("click", () => {
     const active = document.querySelector(".active-slide");
-    const inactive = document.querySelector(".inactive-slide-left");
+    const inactiveLeft = document.querySelector(".inactive-slide-left");
+    const inactiveRight = document.querySelector(".inactive-slide-right");
 
-    if (inactive) {
-        active.classList.add("inactive-slide-right")
-        active.classList.remove("active-slide");
+    active.classList.add("inactive-slide-left");
+    active.classList.remove("active-slide");
 
-        inactive.classList.add("active-slide");
-        inactive.classList.remove("inactive-slide-left");
-    }
+    inactiveRight.classList.add("active-slide");
+    inactiveRight.classList.remove("inactive-slide-right");
+
+    inactiveLeft.classList.add("inactive-slide-right")
+    inactiveLeft.classList.remove("inactive-slide-left");
 });
