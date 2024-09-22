@@ -10,5 +10,11 @@
     "heroName": "Bo",
     "heroUniverse": "Somewhere",
     "heroPowers": "auidssdjfasdf"
+  },
+  {
+    "id": 3,
+    "heroName": "Sigmosis",
+    "heroUniverse": "The Cosmos",
+    "heroPowers": "Too Sigma"
   }
 ]

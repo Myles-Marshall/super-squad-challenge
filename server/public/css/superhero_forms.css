@@ -1,6 +1,7 @@
 body {
     font-family: monospace;
     background-color: #408552;
+    overflow: hidden;
 }
 
 .show-hero-container {
@@ -52,6 +53,8 @@ body {
 }
 
 .hero-form-card {
+    position: absolute;
+    top: 35%;
     background-color: rgba(255, 255, 255);
     color: black;
     text-align: center;
@@ -67,7 +70,7 @@ body {
 }
 
 .inactive-slide-left {
-    left: 10%;
+    transform: translateX(-75%);
     opacity: 0.2;
     pointer-events: none;
     user-select: none;
@@ -75,24 +78,74 @@ body {
 }
 
 .inactive-slide-right {
-    right: 10%;
+    transform: translateX(75%);
     opacity: 0.2;
     pointer-events: none;
     user-select: none;
     z-index: 998;
 }
 
-#creation-card {
-    position: absolute;
-    top: 35%;
+.active-to-left {
+    animation: active-to-inactive-left 0.7s ease-in-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 998;
+}
+
+.inactive-right-to-middle {
+    animation: inactive-right-to-active 1s ease-in-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 999;
+}
+
+.inactive-left-to-right {
+    animation: inactive-left-to-right 1.2s ease-in-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 998;
 }
 
 #update-card {
-    position: absolute;
-    top: 35%;
+    /* display: none; */
 }
 
 #delete-card {
-    position: absolute;
-    top: 35%;
+    /* display: none; */
+}
+
+@keyframes active-to-inactive-left {
+    from {
+        transform: translateX(0);
+        opacity: 0.2;
+    }
+
+    to {
+        transform: translateX(-75%);
+        opacity: 0.2;
+    }
+}
+
+@keyframes inactive-right-to-active {
+    from {
+        transform: translateX(75%);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes inactive-left-to-right {
+    from {
+        transform: translateX(125%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(75%);
+        opacity: 0.2;
+    }
 }
