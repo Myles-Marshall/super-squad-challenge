@@ -10,14 +10,15 @@ leftArrow.addEventListener("click", () => {
     const inactiveLeft = document.querySelector(".inactive-slide-left");
     const inactiveRight = document.querySelector(".inactive-slide-right");
 
+    inactiveLeft.classList.remove("inactive-slide-left");
+    inactiveLeft.classList.add("inactive-left-to-right");
+
     active.classList.remove("active-slide");
     active.classList.add("active-to-left");
 
     inactiveRight.classList.remove("inactive-slide-right");
     inactiveRight.classList.add("inactive-right-to-middle");
 
-    inactiveLeft.classList.remove("inactive-slide-left");
-    inactiveLeft.classList.add("inactive-left-to-right");
 
     setTimeout(() => {
         active.classList.remove("active-to-left");
@@ -28,7 +29,7 @@ leftArrow.addEventListener("click", () => {
 
         inactiveLeft.classList.remove("inactive-left-to-right");
         inactiveLeft.classList.add("inactive-slide-right");
-    }, 1200);
+    }, 1000);
 
     // inactiveLeft.classList.remove("inactive-slide-left");
     // active.style.animationPlayState = "running";
@@ -45,12 +46,23 @@ rightArrow.addEventListener("click", () => {
     const inactiveLeft = document.querySelector(".inactive-slide-left");
     const inactiveRight = document.querySelector(".inactive-slide-right");
 
-    active.classList.add("inactive-slide-left");
-    active.classList.remove("active-slide");
-
-    inactiveRight.classList.add("active-slide");
-    inactiveRight.classList.remove("inactive-slide-right");
-
-    inactiveLeft.classList.add("inactive-slide-right")
     inactiveLeft.classList.remove("inactive-slide-left");
+    inactiveLeft.classList.add("inactive-left-to-middle");
+
+    active.classList.remove("active-slide");
+    active.classList.add("active-to-right");
+
+    inactiveRight.classList.remove("inactive-slide-right");
+    inactiveRight.classList.add("inactive-right-to-left");
+
+    setTimeout(() => {
+        active.classList.remove("active-to-right");
+        active.classList.add("inactive-slide-right");
+
+        inactiveRight.classList.remove("inactive-right-to-left");
+        inactiveRight.classList.add("inactive-slide-left");
+
+        inactiveLeft.classList.remove("inactive-left-to-middle");
+        inactiveLeft.classList.add("active-slide");
+    }, 1000);
 });

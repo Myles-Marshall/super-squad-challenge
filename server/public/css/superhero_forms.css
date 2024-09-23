@@ -64,8 +64,21 @@ body {
     box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5);
 }
 
+#update-card {
+    /* display: none; */
+    /* transform: translateX(75%); */
+    /* opacity: 0.2; */
+}
+
+#delete-card {
+    /* display: none; */
+    /* transform: translateX(-75%); */
+    /* opacity: 0.2; */
+}
+
 .active-slide {
     /* box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.5); */
+    transform: translateX(0);
     z-index: 999;
 }
 
@@ -86,7 +99,14 @@ body {
 }
 
 .active-to-left {
-    animation: active-to-inactive-left 0.7s ease-in-out forwards;
+    animation: active-to-inactive-left 0.6s ease-in-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 998;
+}
+
+.active-to-right {
+    animation: active-to-inactive-right 0.6s ease-in-out forwards;
     pointer-events: none;
     user-select: none;
     z-index: 998;
@@ -99,53 +119,116 @@ body {
     z-index: 999;
 }
 
+.inactive-left-to-middle {
+    animation: inactive-left-to-active 1s ease-in-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 999;
+}
+
 .inactive-left-to-right {
-    animation: inactive-left-to-right 1.2s ease-in-out forwards;
+    animation: inactive-left-to-right 0.8s ease-in-out forwards;
     pointer-events: none;
     user-select: none;
     z-index: 998;
 }
 
-#update-card {
-    /* display: none; */
+.inactive-right-to-left {
+    animation: inactive-right-to-left 0.8s ease-in-out forwards;
+    pointer-events: none;
+    user-select: none;
+    z-index: 998;
 }
 
-#delete-card {
-    /* display: none; */
-}
 
 @keyframes active-to-inactive-left {
-    from {
+    0% {
         transform: translateX(0);
-        opacity: 0.2;
+        opacity: 1;
     }
 
-    to {
+    100% {
         transform: translateX(-75%);
         opacity: 0.2;
     }
 }
 
-@keyframes inactive-right-to-active {
-    from {
-        transform: translateX(75%);
+@keyframes active-to-inactive-right {
+    0% {
+        transform: translateX(0);
         opacity: 1;
     }
 
-    to {
+    100% {
+        transform: translateX(75%);
+        opacity: 0.2;
+    }
+}
+
+@keyframes inactive-right-to-active {
+    0% {
+        transform: translateX(75%);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes inactive-left-to-active {
+    0% {
+        transform: translateX(-75%);
+        opacity: 0.2;
+    }
+
+    100% {
         transform: translateX(0%);
         opacity: 1;
     }
 }
 
 @keyframes inactive-left-to-right {
-    from {
+    0% {
+        transform: translateX(-75%);
+        opacity: 0.2;
+    }
+
+    50% {
+        transform: translateX(-125%);
+        opacity: 0;
+    }
+
+    75% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(75%);
+        opacity: 0.2
+    }
+}
+
+@keyframes inactive-right-to-left {
+    0% {
+        transform: translateX(75%);
+        opacity: 0.2;
+    }
+
+    50% {
         transform: translateX(125%);
         opacity: 0;
     }
 
-    to {
-        transform: translateX(75%);
-        opacity: 0.2;
+    75% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(-75%);
+        opacity: 0.2
     }
 }
