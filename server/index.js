@@ -150,7 +150,7 @@ app.post("/submit-hero", async (req, res) => {
 
         let hero = heroes.find(h => h.heroName === heroName && h.heroUniverse === heroUniverse && h.heroPowers === heroPowers);
         if (hero) {
-            res.send("Hero already exists.")
+            // res.send("Hero already exists.")
         } else {
             let id = heroes.length + 1;
             hero = {id, heroName, heroUniverse, heroPowers };
