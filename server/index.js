@@ -200,6 +200,7 @@ app.put("/delete-hero", async (req, res) => {
 
         if (data) {
             let heroes = JSON.parse(data);
+            console.log(heroes)
             const heroIndex = heroes.findIndex(hero => hero.heroName === existingHeroName && hero.heroUniverse === existingHeroUniverse && hero.heroPowers === existingHeroPowers);
             console.log(heroes[heroIndex])
 
@@ -208,6 +209,9 @@ app.put("/delete-hero", async (req, res) => {
             }
 
             heroes.splice(heroIndex, 1)
+            heroes.forEach((hero) => {
+                hero.id = heroes.indexOf(hero) + 1
+            })
             await fs.writeFile(heroPath, JSON.stringify(heroes, null, 2));
             res.status(200).json({ message: `Hero deleted successfully` });
         }
