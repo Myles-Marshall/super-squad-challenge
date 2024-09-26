@@ -184,19 +184,15 @@
 
           try {
             const response = await fetch(
-              `/delete-hero`,
+              `/delete-hero/${existingHeroName}/${existingHeroUniverse}/${existingHeroPowers}`,
               {
-                method: "PUT",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({existingHeroName, existingHeroUniverse, existingHeroPowers}),
+                method: "DELETE",
               }
             );
 
             renderUsers();
           } catch (error) {
-            console.error(error)
+            console.error(error.message)
           }
         });
 

@@ -15,6 +15,11 @@ body {
     /* justify-content: center; */
 }
 
+textarea {
+    max-width: 90%;
+    max-height: 12rem;
+}
+
 #show-hero-header {
     width: 100%;
     text-align: center;
