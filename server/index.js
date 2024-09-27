@@ -208,6 +208,8 @@ app.delete("/delete-hero/:existingHeroName/:existingHeroUniverse/:existingHeroPo
             }
 
             heroes.splice(heroIndex, 1)
+
+            // replace the id for every hero to be in the correct order
             heroes.forEach((hero) => {
                 hero.id = heroes.indexOf(hero) + 1
             })
